@@ -21,7 +21,7 @@ export default function NewsCard({ article }) {
               component="img"
               height="140"
               image={article.urlToImage}
-              alt="green iguana"
+              alt="Image of the article"
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
