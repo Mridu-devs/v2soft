@@ -3,14 +3,14 @@ import axios from "axios";
 import NewsList from "../newslist/NewsList";
 import "./newsportal.scss";
 import CircularProgress from "@mui/material/CircularProgress";
-import SearchAppBar from "../SearchAppBar";
+import SearchAppBar from "../searchAppBar/SearchAppBar";
 
 const NewsPortal = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [headline,setHeadline]=useState("India's today's Top Headlines")
+  const [headline, setHeadline] = useState("India's today's Top Headlines");
 
   console.log("news", news);
   console.log("searchQuery", searchQuery);
@@ -39,18 +39,18 @@ const NewsPortal = () => {
   };
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    if(!searchQuery){
-     return alert("Please enter a value")
+    if (!searchQuery) {
+      return alert("Please enter a value");
     }
-    setLoading(true)
-    setHeadline(searchQuery)
+    setLoading(true);
+    setHeadline(searchQuery);
     let search = true;
     // Trigger a new search when the form is submitted
     fetchNews(search);
   };
   return (
     <div className="newsportal">
-      <div style={{width:"100%"}}>
+      <div style={{ width: "100%" }}>
         <SearchAppBar
           value={searchQuery}
           setValue={setSearchQuery}
