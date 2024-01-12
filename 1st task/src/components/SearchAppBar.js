@@ -33,7 +33,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   cursor:"pointer",
-//   backgroundColor:"greenyellow",
   zIndex:999,
 }));
 
