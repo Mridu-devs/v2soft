@@ -10,6 +10,7 @@ const NewsPortal = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [headline,setHeadline]=useState("India's today's Top Headlines")
 
   console.log("news", news);
   console.log("searchQuery", searchQuery);
@@ -18,12 +19,12 @@ const NewsPortal = () => {
     fetchNews();
   }, []);
 
-  const fetchNews = async () => {
+  const fetchNews = async (search) => {
     try {
       const apiKey = process.env.REACT_APP_NEWS_API_KEY;
       let apiUrl = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${apiKey}`;
 
-      if (searchQuery) {
+      if (search) {
         apiUrl = `https://newsapi.org/v2/everything?q=${searchQuery}&from=2024-01-10&sortBy=popularity&apiKey=${apiKey}`;
         console.log("apiUrl", apiUrl);
       }
@@ -42,8 +43,10 @@ const NewsPortal = () => {
      return alert("Please enter a value")
     }
     setLoading(true)
+    setHeadline(searchQuery)
+    let search = true;
     // Trigger a new search when the form is submitted
-    fetchNews();
+    fetchNews(search);
   };
   return (
     <div className="newsportal">
@@ -52,9 +55,12 @@ const NewsPortal = () => {
           value={searchQuery}
           setValue={setSearchQuery}
           handleSearchSubmit={handleSearchSubmit}
+          fetchNews={fetchNews}
+          setLoading={setLoading}
+          setHeadline={setHeadline}
         />
       </div>
-      <h1>News Portal</h1>
+      <h1>{headline}</h1>
       {loading ? (
         <CircularProgress size="10rem" />
       ) : error ? (

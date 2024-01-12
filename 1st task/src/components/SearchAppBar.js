@@ -32,8 +32,8 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  cursor:"pointer",
-  zIndex:999,
+  cursor: "pointer",
+  zIndex: 999,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -53,7 +53,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({value,setValue,handleSearchSubmit}) {
+export default function SearchAppBar({
+  value,
+  setValue,
+  handleSearchSubmit,
+  fetchNews,
+  setLoading,
+  setHeadline,
+}) {
+  const onNewsClick = () => {
+    setValue("");
+    setHeadline("India's today's Top Headlines");
+    setLoading(true);
+    fetchNews();
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -71,15 +84,17 @@ export default function SearchAppBar({value,setValue,handleSearchSubmit}) {
           <Typography
             variant="h6"
             noWrap
-            component="div"
+            // component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            V2Soft
+            <div onClick={onNewsClick} style={{ cursor: "pointer" }}>
+              NEWS
+            </div>
           </Typography>
           <Search>
-              <SearchIconWrapper>
-                <SearchIcon onClick={(e)=>handleSearchSubmit(e)} />
-              </SearchIconWrapper>
+            <SearchIconWrapper>
+              <SearchIcon onClick={(e) => handleSearchSubmit(e)} />
+            </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
