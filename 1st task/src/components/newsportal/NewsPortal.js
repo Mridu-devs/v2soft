@@ -12,9 +12,6 @@ const NewsPortal = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [headline, setHeadline] = useState("India's today's Top Headlines");
 
-  console.log("news", news);
-  console.log("searchQuery", searchQuery);
-
   useEffect(() => {
     fetchNews();
   }, []);
@@ -26,7 +23,6 @@ const NewsPortal = () => {
 
       if (search) {
         apiUrl = `https://newsapi.org/v2/everything?q=${searchQuery}&from=2024-01-10&sortBy=popularity&apiKey=${apiKey}`;
-        console.log("apiUrl", apiUrl);
       }
       const response = await axios.get(apiUrl);
       setNews(response.data.articles);
