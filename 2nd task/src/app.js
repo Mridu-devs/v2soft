@@ -1,6 +1,5 @@
 // src/app.js
 const express = require('express');
-const weatherController = require('./controllers/weatherController');
 const { PORT } = require('./config');
 
 const app = express();
@@ -9,7 +8,8 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use(weatherController);
+const weatherRouter = require('./routes/weatherRouter');
+app.use("/weather",weatherRouter);
 
 // Start the server
 app.listen(PORT, () => {
